@@ -1,0 +1,15 @@
+{
+  "TrustedPublishers": [
+    "Microsoft Corporation",
+    "Google LLC",
+    "Mozilla Corporation",
+    "NVIDIA Corporation"
+  ],
+  "TrustedHashes": [],
+  "TrustedPaths": [],
+  "TrustedScheduledTasks": [],
+  "TrustedServices": [],
+  "TrustedBrowserExtensions": [],
+  "IgnoredFindings": [],
+  "IgnoredCategories": []
+}

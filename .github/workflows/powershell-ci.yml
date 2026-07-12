@@ -1,0 +1,41 @@
+name: PowerShell CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shell:
+          - powershell
+          - pwsh
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install test tools
+        shell: ${{ matrix.shell }}
+        run: |
+          Install-Module Pester -MinimumVersion 5.5.0 -Force -Scope CurrentUser
+          Install-Module PSScriptAnalyzer -Force -Scope CurrentUser
+      - name: Validate module import
+        shell: ${{ matrix.shell }}
+        run: Import-Module ./SecurityPupForensics.psd1 -Force
+      - name: Run Pester
+        shell: ${{ matrix.shell }}
+        run: Invoke-Pester ./Tests -CI
+      - name: Run ScriptAnalyzer
+        shell: ${{ matrix.shell }}
+        run: |
+          $results = Invoke-ScriptAnalyzer -Path . -Recurse -Severity Error -ExcludeRule PSAvoidUsingWriteHost
+          $results | Format-Table -AutoSize
+          if ($results) { throw 'PSScriptAnalyzer errors found.' }
+      - name: Generate sample report
+        shell: ${{ matrix.shell }}
+        run: ./Invoke-SecurityPupForensics.ps1 -Mode Fast -OutputDirectory "$env:RUNNER_TEMP/SecurityAudit" -NoHtml

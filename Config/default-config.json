@@ -1,0 +1,27 @@
+{
+  "PortableApplicationPaths": [],
+  "RiskRules": {
+    "AutoStart": 40,
+    "ScheduledTaskUserWritable": 35,
+    "Unsigned": 35,
+    "BroadDefenderExclusion": 30,
+    "ServiceUserWritable": 30,
+    "UnknownPublisher": 25,
+    "Temp": 25,
+    "AppData": 20,
+    "BrowserExtensionExternal": 20,
+    "ProxyOrHosts": 20,
+    "UnusualRootCertificate": 20,
+    "OrphanedUninstall": 15,
+    "DuplicateInstallation": 15,
+    "MissingVersionMetadata": 10,
+    "ValidMicrosoftSignature": -40,
+    "AllowlistedPublisher": -25,
+    "WindowsOrProgramFiles": -20,
+    "KnownWindowsComponent": -15,
+    "AllowlistedHash": -10
+  },
+  "Limits": {
+    "PortableExecutableMaximum": 2000
+  }
+}
